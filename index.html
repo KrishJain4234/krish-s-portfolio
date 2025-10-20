@@ -8,6 +8,9 @@
     <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
+    <!-- GSAP for typing animation and Blur Text effects -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    
     <!-- AOS CSS (Animate On Scroll) -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
@@ -137,8 +140,9 @@
     <main>
         
         <!-- 1. HOME/HERO SECTION -->
-        <section id="home" class="flex items-center justify-center min-h-screen pt-16 px-4 md:px-20 text-center md:text-left">
-            <div class="max-w-6xl w-full mx-auto flex flex-col md:flex-row items-center justify-between">
+        <section id="home" class="flex items-center justify-center min-h-screen pt-16 px-4 md:px-20 text-center md:text-left relative">
+
+            <div class="max-w-6xl w-full mx-auto flex flex-col md:flex-row items-center justify-between relative z-10">
                 
                 <!-- Left: Text Content -->
                 <div class="md:w-3/5 space-y-6" data-aos="fade-right">
@@ -185,20 +189,20 @@
                 <div class="space-y-6" data-aos="fade-left" data-aos-delay="200">
                     
                     <!-- UPDATED HEADLINE/PREAMBLE -->
-                    <p class="text-xl font-semibold text-gray-200">
+                    <p id="about-preamble-text" class="text-xl font-semibold text-gray-200" style="display: flex; flex-wrap: wrap;">
                         A second-year student driven by a passion for coding, building projects, and continuous skill acquisition.
                     </p>
                     
                     <!-- UPDATED DETAIL PARAGRAPH -->
-                    <p class="text-gray-400">
+                    <p id="about-detail-text" class="text-gray-400" style="display: flex; flex-wrap: wrap;">
                         I am currently pursuing my degree at BMS Institute of Technology, where I maintain a strong current CGPA of 9.33. I have a solid foundation in Python and am aggressively building my skills across the stack, including Machine Learning (ML), C++, and DSA. I am an active member of the Tech Team for the "E-Cell" Club BMSIT. I believe in turning ideas into tangible projects and always have something in the works, including *two confidential new projects* in the pipeline.
                     </p>
                     
                     <!-- UPDATED BULLETED LIST -->
                     <ul class="space-y-2 text-gray-300">
-                        <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-indigo-400 mr-3"></i> Maintaining an excellent academic standing (CGPA 9.33).</li>
-                        <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-indigo-400 mr-3"></i> Actively learning C++, ML, and Data Structures & Algorithms (DSA).</li>
-                        <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-indigo-400 mr-3"></i> Currently involved in two new, innovative project builds.</li>
+                        <li class="flex items-center" data-aos="fade-up" data-aos-delay="400"><i data-lucide="check-circle" class="w-5 h-5 text-indigo-400 mr-3"></i> Maintaining an excellent academic standing (CGPA 9.33).</li>
+                        <li class="flex items-center" data-aos="fade-up" data-aos-delay="500"><i data-lucide="check-circle" class="w-5 h-5 text-indigo-400 mr-3"></i> Actively learning C++, ML, and Data Structures & Algorithms (DSA).</li>
+                        <li class="flex items-center" data-aos="fade-up" data-aos-delay="600"><i data-lucide="check-circle" class="w-5 h-5 text-indigo-400 mr-3"></i> Currently involved in two new, innovative project builds.</li>
                     </ul>
                     
                     <a href="CV.png" download class="inline-block mt-4 bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-6 rounded-md transition-colors">Download CV</a>
@@ -233,7 +237,7 @@
                 <div class="bg-card-color p-6 rounded-xl shadow-2xl border-t-4 border-indigo-500 icon-hover-effect" data-aos="fade-up" data-aos-delay="300">
                     <i data-lucide="database" class="w-8 h-8 text-indigo-400 mb-3"></i>
                     <h3 class="text-xl font-semibold mb-2">Database & DevOps</h3>
-                    <p class="text-gray-400 text-sm">PostgreSQL, MongoDB, Docker, AWS/GCP, CI/CD, Git/GitHub</p>
+                    <p class="text-gray-400 text-sm">PostgreSQL, MongoDB, Docker, CI/CD, Git/GitHub</p>
                 </div>
 
                 <!-- Skill Card 4: Virtual/Soft Skills (as requested) -->
@@ -366,7 +370,7 @@
 
     </main>
     
-    <!-- Custom Alert Modal Structure (No longer used for submission success, but kept for potential future use) -->
+    <!-- Custom Alert Modal Structure -->
     <div id="custom-alert-modal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 hidden transition-opacity duration-300">
         <div class="bg-card-color p-8 rounded-xl shadow-2xl border-t-4 border-indigo-500 max-w-sm mx-4 w-full transform transition-all duration-300 scale-95 opacity-0">
             <h3 class="text-xl font-bold text-indigo-400 mb-4">Message Sent!</h3>
@@ -376,7 +380,6 @@
     </div>
 
 
-  
     <!-- Footer -->
     <footer class="mt-20 p-6 bg-card-color border-t border-indigo-700/50">
         <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center text-center md:text-left space-y-4 md:space-y-0">
@@ -390,7 +393,7 @@
                 </div>
                 <div class="flex items-center justify-center md:justify-start text-gray-400">
                     <i data-lucide="phone" class="w-4 h-4 mr-2"></i> 
-                    <a href="tel:+919876543210" class="hover:text-indigo-300">+91 8209664867</a>
+                    <a href="tel:+918209664867" class="hover:text-indigo-300">+91 8209664867</a>
                 </div>
             </div>
 
@@ -467,8 +470,8 @@
                 lucide.createIcons();
             });
         });
-
-        // --- 5. ADVANCED TYPING ANIMATION LOGIC ---
+        
+        // --- 5. ADVANCED TYPING ANIMATION LOGIC (Header) ---
 
         const targetElement = document.getElementById('typing-text-target');
         const roles = ["Full Stack Developer", "React Specialist", "Backend Engineer", "DevOps Enthusiast"];
@@ -503,13 +506,82 @@
 
             setTimeout(type, speed);
         }
+        
+        // --- 6. BLUR TEXT ANIMATION LOGIC (About Me Section) ---
+        
+        // Helper function to process and split text into individual spans
+        function processTextForAnimation(element) {
+            if (!element) return;
+            const originalText = element.textContent.trim();
+            element.textContent = ''; // Clear original text
 
-        // Start the animation when the page loads
+            const words = originalText.split(/\s+/);
+
+            words.forEach((word, wordIndex) => {
+                // Span for the word itself
+                const wordSpan = document.createElement('span');
+                wordSpan.textContent = word;
+                wordSpan.className = 'inline-block text-segment';
+                wordSpan.style.display = 'inline-block';
+                
+                // Set initial hidden state using GSAP
+                gsap.set(wordSpan, {
+                    filter: 'blur(10px)',
+                    opacity: 0,
+                    y: 20
+                });
+
+                element.appendChild(wordSpan);
+
+                // Span for the space after the word (if not the last word)
+                if (wordIndex < words.length - 1) {
+                    const spaceSpan = document.createElement('span');
+                    spaceSpan.innerHTML = '&nbsp;'; // Non-breaking space
+                    element.appendChild(spaceSpan);
+                }
+            });
+            return element.querySelectorAll('.text-segment'); // Return the actual word spans
+        }
+
+        // Animation function using Intersection Observer to trigger on scroll
+        function initBlurTextAnimation(elementId, delayMultiplier = 100) {
+            const container = document.getElementById(elementId);
+            if (!container) return;
+
+            const segments = processTextForAnimation(container);
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        segments.forEach((segment, index) => {
+                            gsap.to(segment, {
+                                filter: 'blur(0px)',
+                                opacity: 1,
+                                y: 0,
+                                duration: 0.8,
+                                delay: index * (delayMultiplier / 1000), // Staggered delay
+                                ease: "power2.out"
+                            });
+                        });
+                        observer.unobserve(container); // Stop observing once animated
+                    }
+                });
+            }, { threshold: 0.5 }); // Trigger when 50% of container is visible
+
+            observer.observe(container);
+        }
+        
+        // --- 7. START ALL ANIMATIONS ON LOAD ---
         window.addEventListener('load', function() {
             if (targetElement) {
-                type();
+                type(); // Start typing animation
             }
+            // Start Blur Text effects on the main bio paragraphs
+            initBlurTextAnimation('about-preamble-text', 70); // Faster stagger for headline
+            initBlurTextAnimation('about-detail-text', 40); // Slower stagger for long paragraph
         });
+
     </script>
 </body>
 </html>
+
