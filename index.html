@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krish - Full Stack Developer Portfolio</title>
+
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- AOS CSS (Animate On Scroll) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Load Poppins Font for professional aesthetic -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Load Lucide Icons for aesthetic elements -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* Base styling derived from your reference image: dark background, white text */
+        :root {
+            --primary-color: #4f46e5; /* Indigo-600 */
+            --background-color: #000021; /* Very Dark Blue */
+            --card-color: #0d1130;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--background-color); 
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        .navbar-custom-bg {
+            background-color: #1a2040; /* Slightly lighter than background for contrast */
+        }
+
+        /* Custom scrollbar for a sleek look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--background-color);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 4px;
+        }
+        
+        /* Utility for smooth scroll highlighting */
+        .section-padding {
+            padding-top: 8rem; 
+            padding-bottom: 4rem;
+        }
+
+        /* Add hover effect to icons */
+        .icon-hover-effect {
+            transition: transform 0.3s ease-in-out;
+        }
+        .icon-hover-effect:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Mobile-specific fixes for text size and typing animation overflow */
+        @media (max-width: 640px) {
+            h1 {
+                font-size: 3.5rem !important; /* Smaller on mobile */
+            }
+            h2 {
+                font-size: 1.5rem !important; /* Adjusted h2 for mobile */
+            }
+            /* Ensure the animated text span doesn't create overflow */
+            #typing-text-target {
+                display: inline-block;
+                max-width: 100%;
+                overflow: hidden;
+                white-space: nowrap;
+                vertical-align: top;
+            }
+        }
+        /* Mobile Menu Toggle Logic (using Tailwind hidden/block classes and simple JS for interaction) */
+        @media (max-width: 768px) {
+            .nav-list-mobile {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen selection:bg-indigo-500 selection:text-white">
+
+    <!-- Header & Navigation -->
+    <header class="sticky top-0 left-0 w-full z-30 shadow-2xl">
+        <nav class="flex justify-between items-center h-16 px-4 md:px-16 navbar-custom-bg border-b border-indigo-700/50">
+            
+            <!-- Left Section: Portfolio Name -->
+            <div class="left text-2xl font-bold text-indigo-400">
+                Krish's Portfolio
+            </div>
+
+            <!-- Right Section: Navigation Links (Desktop) -->
+            <div class="hidden md:flex right space-x-8 text-sm font-medium">
+                <a href="#home" class="text-white hover:text-indigo-400 transition-colors">Home</a>
+                <a href="#about" class="text-white hover:text-indigo-400 transition-colors">About</a>
+                <a href="#skills" class="text-white hover:text-indigo-400 transition-colors">Skills</a>
+                <a href="#services" class="text-white hover:text-indigo-400 transition-colors">Services</a>
+                <a href="#projects" class="text-white hover:text-indigo-400 transition-colors">Projects</a>
+                <a href="#contact" class="text-white hover:text-indigo-400 transition-colors">Contact Me</a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden text-white p-2 focus:outline-none">
+                <i data-lucide="menu"></i>
+            </button>
+        </nav>
+        
+        <!-- Mobile Navigation Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden absolute w-full navbar-custom-bg shadow-xl">
+            <a href="#home" class="block py-3 px-6 text-white hover:bg-indigo-700 transition-colors border-b border-indigo-800">Home</a>
+            <a href="#about" class="block py-3 px-6 text-white hover:bg-indigo-700 transition-colors border-b border-indigo-800">About</a>
+            <a href="#skills" class="block py-3 px-6 text-white hover:bg-indigo-700 transition-colors border-b border-indigo-800">Skills</a>
+            <a href="#services" class="block py-3 px-6 text-white hover:bg-indigo-700 transition-colors border-b border-indigo-800">Services</a>
+            <a href="#projects" class="block py-3 px-6 text-white hover:bg-indigo-700 transition-colors border-b border-indigo-800">Projects</a>
+            <a href="#contact" class="block py-3 px-6 text-white hover:bg-indigo-700 transition-colors">Contact Me</a>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main>
+        
+        <!-- 1. HOME/HERO SECTION -->
+        <section id="home" class="flex items-center justify-center min-h-screen pt-16 px-4 md:px-20 text-center md:text-left">
+            <div class="max-w-6xl w-full mx-auto flex flex-col md:flex-row items-center justify-between">
+                
+                <!-- Left: Text Content -->
+                <div class="md:w-3/5 space-y-6" data-aos="fade-right">
+                    <p class="text-indigo-400 text-xl font-medium">Hello, I'm</p>
+                    <h1 class="text-6xl md:text-8xl font-extrabold leading-tight">Krish</h1>
+                    <h2 class="text-3xl md:text-4xl text-gray-300 font-light h-10 md:h-12">
+                        A Passionate <span id="typing-text-target" class="text-indigo-400 font-semibold border-r-4 border-indigo-400 pr-1 animate-pulse"></span>
+                    </h2>
+                    <p class="text-lg text-gray-400 max-w-xl mx-auto md:mx-0">
+                        I build dynamic, responsive, and high-performance web applications. Let's create something impactful together.
+                    </p>
+                    <div class="flex flex-wrap gap-4 justify-center md:justify-start pt-4">
+                        <a href="#projects" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 shadow-lg shadow-indigo-500/50">View My Work</a>
+                        <a href="#contact" class="bg-transparent border border-indigo-600 hover:bg-indigo-600 text-indigo-400 hover:text-white font-semibold py-3 px-8 rounded-full transition-all duration-300">Get In Touch</a>
+                    </div>
+                </div>
+
+                <!-- Right: Krish's Portfolio Picture -->
+                <div class="md:w-2/5 mt-10 md:mt-0 flex justify-center" data-aos="zoom-in" data-aos-delay="500">
+                    <div class="w-64 h-64 md:w-80 md:h-80 rounded-full border-4 border-indigo-500 overflow-hidden flex items-center justify-center shadow-2xl">
+                        <img src="portfolio.jpg" alt="Krish's Portfolio Picture" class="object-cover w-full h-full">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Separator -->
+        <hr class="w-4/5 mx-auto border-t border-indigo-700/50 my-12" id="about">
+
+        <!-- 2. ABOUT ME SECTION -->
+        <section class="section-padding px-4 md:px-20 max-w-6xl mx-auto">
+            <h2 class="text-5xl font-extrabold text-center mb-12" data-aos="zoom-in">About <span class="text-indigo-400">Me</span></h2>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                
+                <!-- Left: Krish's About Me Picture -->
+                <div class="flex justify-center" data-aos="fade-right">
+                    <div class="w-full max-w-sm h-64 rounded-lg shadow-xl border-t-4 border-indigo-500 overflow-hidden flex items-center justify-center">
+                        <img src="about me.jpg" alt="Krish's About Me Picture" class="object-cover w-full h-full">
+                    </div>
+                </div>
+
+                <!-- Right: Details -->
+                <div class="space-y-6" data-aos="fade-left" data-aos-delay="200">
+                    
+                    <!-- UPDATED HEADLINE/PREAMBLE -->
+                    <p class="text-xl font-semibold text-gray-200">
+                        A second-year student driven by a passion for coding, building projects, and continuous skill acquisition.
+                    </p>
+                    
+                    <!-- UPDATED DETAIL PARAGRAPH -->
+                    <p class="text-gray-400">
+                        I am currently pursuing my degree at BMS Institute of Technology, where I maintain a strong current CGPA of 9.33. I have a solid foundation in Python and am aggressively building my skills across the stack, including Machine Learning (ML), C++, and DSA. I am an active member of the Tech Team for the "E-Cell" Club BMSIT. I believe in turning ideas into tangible projects and always have something in the works, including *two confidential new projects* in the pipeline.
+                    </p>
+                    
+                    <!-- UPDATED BULLETED LIST -->
+                    <ul class="space-y-2 text-gray-300">
+                        <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-indigo-400 mr-3"></i> Maintaining an excellent academic standing (CGPA 9.33).</li>
+                        <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-indigo-400 mr-3"></i> Actively learning C++, ML, and Data Structures & Algorithms (DSA).</li>
+                        <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-indigo-400 mr-3"></i> Currently involved in two new, innovative project builds.</li>
+                    </ul>
+                    
+                    <a href="CV.png" download class="inline-block mt-4 bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-6 rounded-md transition-colors">Download CV</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Separator -->
+        <hr class="w-4/5 mx-auto border-t border-indigo-700/50 my-12" id="skills">
+
+        <!-- 3. SKILLS SECTION -->
+        <section class="section-padding px-4 md:px-20 max-w-6xl mx-auto">
+            <h2 class="text-5xl font-extrabold text-center mb-12" data-aos="zoom-in">Technical <span class="text-indigo-400">Skills</span></h2>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                
+                <!-- Skill Card 1: Frontend -->
+                <div class="bg-card-color p-6 rounded-xl shadow-2xl border-t-4 border-indigo-500 icon-hover-effect" data-aos="fade-up" data-aos-delay="100">
+                    <i data-lucide="layout-grid" class="w-8 h-8 text-indigo-400 mb-3"></i>
+                    <h3 class="text-xl font-semibold mb-2">Frontend</h3>
+                    <p class="text-gray-400 text-sm">HTML5, CSS3, JavaScript (ES6+), React.js, Vue.js, Tailwind CSS</p>
+                </div>
+
+                <!-- Skill Card 2: Backend -->
+                <div class="bg-card-color p-6 rounded-xl shadow-2xl border-t-4 border-indigo-500 icon-hover-effect" data-aos="fade-up" data-aos-delay="200">
+                    <i data-lucide="server" class="w-8 h-8 text-indigo-400 mb-3"></i>
+                    <h3 class="text-xl font-semibold mb-2">Backend</h3>
+                    <p class="text-gray-400 text-sm">Node.js, Express, Python (Django/Flask), REST APIs, GraphQL</p>
+                </div>
+
+                <!-- Skill Card 3: Databases & DevOps -->
+                <div class="bg-card-color p-6 rounded-xl shadow-2xl border-t-4 border-indigo-500 icon-hover-effect" data-aos="fade-up" data-aos-delay="300">
+                    <i data-lucide="database" class="w-8 h-8 text-indigo-400 mb-3"></i>
+                    <h3 class="text-xl font-semibold mb-2">Database & DevOps</h3>
+                    <p class="text-gray-400 text-sm">PostgreSQL, MongoDB, Docker, AWS/GCP, CI/CD, Git/GitHub</p>
+                </div>
+
+                <!-- Skill Card 4: Virtual/Soft Skills (as requested) -->
+                <div class="bg-card-color p-6 rounded-xl shadow-2xl border-t-4 border-indigo-500 icon-hover-effect" data-aos="fade-up" data-aos-delay="400">
+                    <i data-lucide="brain" class="w-8 h-8 text-indigo-400 mb-3"></i>
+                    <h3 class="text-xl font-semibold mb-2">Soft Skills</h3>
+                    <p class="text-gray-400 text-sm">Problem-Solving, Agile Methodology, Mentorship, Team Collaboration</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Separator -->
+        <hr class="w-4/5 mx-auto border-t border-indigo-700/50 my-12" id="services">
+
+        <!-- 4. SERVICES SECTION -->
+        <section class="section-padding px-4 md:px-20 max-w-6xl mx-auto">
+            <h2 class="text-5xl font-extrabold text-center mb-12" data-aos="zoom-in">My <span class="text-indigo-400">Services</span></h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                
+                <!-- Service 1 -->
+                <div class="bg-card-color p-8 rounded-xl shadow-2xl transition-transform duration-300 hover:scale-[1.03] border border-transparent hover:border-indigo-500" data-aos="fade-up" data-aos-delay="100">
+                    <i data-lucide="paint-roller" class="w-10 h-10 text-indigo-400 mb-4"></i>
+                    <h3 class="text-2xl font-semibold mb-3">Web Design & UI/UX</h3>
+                    <p class="text-gray-400">Creating modern, responsive, and user-friendly interfaces with a mobile-first approach.</p>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="bg-card-color p-8 rounded-xl shadow-2xl transition-transform duration-300 hover:scale-[1.03] border border-transparent hover:border-indigo-500" data-aos="fade-up" data-aos-delay="200">
+                    <i data-lucide="terminal" class="w-10 h-10 text-indigo-400 mb-4"></i>
+                    <h3 class="text-2xl font-semibold mb-3">Full Stack Development</h3>
+                    <p class="text-gray-400">End-to-end application development, from database architecture to client-side logic.</p>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="bg-card-color p-8 rounded-xl shadow-2xl transition-transform duration-300 hover:scale-[1.03] border border-transparent hover:border-indigo-500" data-aos="fade-up" data-aos-delay="300">
+                    <i data-lucide="rocket" class="w-10 h-10 text-indigo-400 mb-4"></i>
+                    <h3 class="text-2xl font-semibold mb-3">Performance Optimization</h3>
+                    <p class="text-gray-400">Improving speed, scalability, and stability of existing web applications and databases.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Separator -->
+        <hr class="w-4/5 mx-auto border-t border-indigo-700/50 my-12" id="projects">
+
+        <!-- 5. PROJECTS SECTION -->
+        <section class="section-padding px-4 md:px-20 max-w-6xl mx-auto">
+            <h2 class="text-5xl font-extrabold text-center mb-12" data-aos="zoom-in">My Recent <span class="text-indigo-400">Projects</span></h2>
+            
+            <div class="grid md:grid-cols-2 gap-10">
+                
+                <!-- Project 1 -->
+                <div class="bg-card-color rounded-xl shadow-2xl overflow-hidden group" data-aos="fade-right">
+                    <div class="h-48 overflow-hidden">
+                        <img src="project1.png" alt="Screenshot of VYMBO E-Commerce Platform" class="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105">
+                    </div>
+                    <div class="p-6 space-y-3">
+                        <h3 class="text-2xl font-semibold text-indigo-300">VYMBO</h3>
+                        <p class="text-gray-400">VYMBO is a traveler-exclusive community platform that transforms dull commutes into fun, social moments through real-time chat, shared music playlists, and quick, mood-based multiplayer games. The solution uses QR codes for auto-login and context-joining, offering a unique micro-entertainment experience for urban commuters, students, and Gen Z.</p>
+                        <div class="flex flex-wrap gap-2 text-sm">
+                            <span class="bg-indigo-900/50 text-indigo-300 py-1 px-3 rounded-full">React</span>
+                            <span class="bg-indigo-900/50 text-indigo-300 py-1 px-3 rounded-full">Socket.io</span>
+                            <span class="bg-indigo-900/50 text-indigo-300 py-1 px-3 rounded-full">MongoDB</span>
+                        </div>
+                        <div class="flex gap-4 pt-3">
+                            <a href="#" class="flex items-center text-indigo-400 hover:text-indigo-300 transition-colors font-medium"><i data-lucide="github" class="w-5 h-5 mr-1"></i> Code</a>
+                            <a href="#" class="flex items-center text-indigo-400 hover:text-indigo-300 transition-colors font-medium"><i data-lucide="external-link" class="w-5 h-5 mr-1"></i> Live Demo</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="bg-card-color rounded-xl shadow-2xl overflow-hidden group" data-aos="fade-left">
+                    <div class="h-48 overflow-hidden">
+                        <img src="project2.png" alt="Screenshot of VYMBO E-Commerce Platform" class="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105">
+                    </div>
+                    <div class="p-6 space-y-3">
+                        <h3 class="text-2xl font-semibold text-indigo-300">AI-Powered Train Traffic Control</h3>
+                        <p class="text-gray-400">Line Switch utilizes AI and Machine Learning (PyTorch/Scikit-learn) to dynamically optimize train precedence and crossing decisions. This solution directly maximizes section throughput and punctuality by providing real-time re-optimization and predictive controller support.</p>
+                        <div class="flex flex-wrap gap-2 text-sm">
+                            <span class="bg-indigo-900/50 text-indigo-300 py-1 px-3 rounded-full">Node.js, Express</span>
+                            <span class="bg-indigo-900/50 text-indigo-300 py-1 px-3 rounded-full">PyTorch + Scikit-learn</span>
+                            <span class="bg-indigo-900/50 text-indigo-300 py-1 px-3 rounded-full">PostgreSQL</span>
+                        </div>
+                        <div class="flex gap-4 pt-3">
+                            <a href="#" class="flex items-center text-indigo-400 hover:text-indigo-300 transition-colors font-medium"><i data-lucide="github" class="w-5 h-5 mr-1"></i> Code</a>
+                            <a href="#" class="flex items-center text-indigo-400 hover:text-indigo-300 transition-colors font-medium"><i data-lucide="external-link" class="w-5 h-5 mr-1"></i> Live Demo</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Separator -->
+        <hr class="w-4/5 mx-auto border-t border-indigo-700/50 my-12" id="contact">
+
+        <!-- 6. CONTACT SECTION -->
+        <section class="section-padding px-4 md:px-20 max-w-3xl mx-auto">
+            <h2 class="text-5xl font-extrabold text-center mb-12" data-aos="zoom-in">Get In <span class="text-indigo-400">Touch</span></h2>
+            
+            <div class="bg-card-color p-8 md:p-12 rounded-xl shadow-2xl border-t-4 border-indigo-500" data-aos="flip-up">
+                <p class="text-center text-gray-300 mb-8">
+                    Have a project in mind or just want to say hello? Send me a message!
+                </p>
+
+                <form class="space-y-6" action="https://formspree.io/f/xvgwyeok" method="POST">
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-gray-300 mb-1">Name</label>
+                        <input type="text" id="name" name="name" placeholder="Your Name" class="w-full p-3 rounded-lg bg-gray-700 border border-gray-600 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 text-white transition-colors" required>
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-300 mb-1">Email</label>
+                        <input type="email" id="email" name="_replyto" placeholder="you@example.com" class="w-full p-3 rounded-lg bg-gray-700 border border-gray-600 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 text-white transition-colors" required>
+                    </div>
+                    <div>
+                        <label for="message" class="block text-sm font-medium text-gray-300 mb-1">Message</label>
+                        <textarea id="message" name="message" rows="4" placeholder="How can I help you?" class="w-full p-3 rounded-lg bg-gray-700 border border-gray-600 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 text-white transition-colors" required></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 rounded-lg transition-colors duration-300 shadow-md shadow-indigo-500/50">Send Message</button>
+                </form>
+
+                <div class="flex justify-center gap-8 mt-8">
+                    <a href="https://www.linkedin.com/in/krish-jain-28028928b" target="_blank" class="icon-hover-effect text-gray-400 hover:text-indigo-400 transition-colors"><i data-lucide="linkedin" class="w-8 h-8"></i></a>
+                    <a href="https://github.com/KrishJain4234" target="_blank" class="icon-hover-effect text-gray-400 hover:text-indigo-400 transition-colors"><i data-lucide="github" class="w-8 h-8"></i></a>
+                    <a href="mailto:kj896679@gmail.com" class="icon-hover-effect text-gray-400 hover:text-indigo-400 transition-colors"><i data-lucide="mail" class="w-8 h-8"></i></a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <!-- Custom Alert Modal Structure (No longer used for submission success, but kept for potential future use) -->
+    <div id="custom-alert-modal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 hidden transition-opacity duration-300">
+        <div class="bg-card-color p-8 rounded-xl shadow-2xl border-t-4 border-indigo-500 max-w-sm mx-4 w-full transform transition-all duration-300 scale-95 opacity-0">
+            <h3 class="text-xl font-bold text-indigo-400 mb-4">Message Sent!</h3>
+            <p id="alert-message-content" class="text-gray-300 mb-6">Thank you for your message, Krish will be in touch soon!</p>
+            <button id="alert-close-button" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 rounded-lg transition-colors">Close</button>
+        </div>
+    </div>
+
+
+  
+    <!-- Footer -->
+    <footer class="mt-20 p-6 bg-card-color border-t border-indigo-700/50">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center text-center md:text-left space-y-4 md:space-y-0">
+            
+            <!-- Contact Info -->
+            <div class="space-y-1 text-sm">
+                <p class="text-indigo-400 font-semibold mb-2">Get Connected:</p>
+                <div class="flex items-center justify-center md:justify-start text-gray-400">
+                    <i data-lucide="mail" class="w-4 h-4 mr-2"></i> 
+                    <a href="mailto:kj896679@gmail.com" class="hover:text-indigo-300">kj896679@gmail.com</a>
+                </div>
+                <div class="flex items-center justify-center md:justify-start text-gray-400">
+                    <i data-lucide="phone" class="w-4 h-4 mr-2"></i> 
+                    <a href="tel:+919876543210" class="hover:text-indigo-300">+91 98765 43210 (Placeholder)</a>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <p class="text-gray-400 text-sm">
+                &copy; <span id="current-year"></span> Krish. All Rights Reserved. Built with Tailwind CSS.
+            </p>
+        </div>
+    </footer>
+
+    <!-- JavaScript for dynamic elements -->
+    <script>
+        // --- 1. INITIAL SETUP ---
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Set Current Year in Footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        // --- 2. AOS INITIALIZATION ---
+    </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000, // Duration of animation
+            once: true,     // Only run animations once
+        });
+
+        // --- 3. CUSTOM MODAL LOGIC (Simplified: removed form handler) ---
+
+        const modal = document.getElementById('custom-alert-modal');
+        const modalContent = modal.querySelector('div');
+        const alertCloseButton = document.getElementById('alert-close-button');
+
+
+        function showCustomAlert(message) {
+            // Note: This function is currently unused since Formspree handles success, 
+            // but is kept here if you want to use it for client-side form validation later.
+            const alertMessageContent = document.getElementById('alert-message-content');
+            alertMessageContent.textContent = message;
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modalContent.classList.remove('scale-95', 'opacity-0');
+                modalContent.classList.add('scale-100', 'opacity-100');
+            }, 50);
+        }
+
+        alertCloseButton.onclick = () => {
+            modalContent.classList.remove('scale-100', 'opacity-100');
+            modalContent.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300); // Wait for transition to finish
+        };
+        
+        // --- 4. MOBILE MENU FUNCTIONALITY ---
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            // Toggle visibility using Tailwind's 'hidden' class
+            mobileMenu.classList.toggle('hidden');
+            
+            // Change icon from 'menu' to 'x' when open
+            mobileMenuButton.innerHTML = mobileMenu.classList.contains('hidden') ? '<i data-lucide="menu"></i>' : '<i data-lucide="x"></i>';
+            lucide.createIcons(); // Re-render icon
+        });
+
+        // Close menu when a link is clicked
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileMenuButton.innerHTML = '<i data-lucide="menu"></i>'; // Reset icon
+                lucide.createIcons();
+            });
+        });
+
+        // --- 5. ADVANCED TYPING ANIMATION LOGIC ---
+
+        const targetElement = document.getElementById('typing-text-target');
+        const roles = ["Full Stack Developer", "React Specialist", "Backend Engineer", "DevOps Enthusiast"];
+        
+        let roleIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typingSpeed = 100;
+        const deletingSpeed = 50;
+        const delayTime = 1500;
+
+        function type() {
+            const currentRole = roles[roleIndex];
+            
+            if (isDeleting) {
+                targetElement.textContent = currentRole.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                targetElement.textContent = currentRole.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let speed = isDeleting ? deletingSpeed : typingSpeed;
+
+            if (!isDeleting && charIndex === currentRole.length) {
+                speed = delayTime;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                roleIndex = (roleIndex + 1) % roles.length;
+            }
+
+            setTimeout(type, speed);
+        }
+
+        // Start the animation when the page loads
+        window.addEventListener('load', function() {
+            if (targetElement) {
+                type();
+            }
+        });
+    </script>
+</body>
+</html>
