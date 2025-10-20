@@ -8,7 +8,7 @@
     <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- GSAP for typing animation and Blur Text effects -->
+    <!-- GSAP for typing animation, Blur Text, and Skill Burst effects -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     
     <!-- AOS CSS (Animate On Scroll) -->
@@ -40,7 +40,7 @@
             background-color: var(--background-color); 
             color: white;
             font-family: 'Poppins', sans-serif;
-            scroll-behavior: smooth;
+            /* SCROLL BEHAVIOR REMOVED for instant jumps */
         }
         
         .navbar-custom-bg {
@@ -59,20 +59,45 @@
             border-radius: 4px;
         }
         
-        /* Utility for smooth scroll highlighting */
+        /* Utility for section padding */
         .section-padding {
             padding-top: 8rem; 
             padding-bottom: 4rem;
         }
 
-        /* Add hover effect to icons */
+        /* Remove default icon hover effect, as the Skill Burst handles hover */
         .icon-hover-effect {
-            transition: transform 0.3s ease-in-out;
+            transition: none;
         }
         .icon-hover-effect:hover {
-            transform: translateY(-5px);
+            transform: none;
         }
 
+        /* --- SKILL BURST EFFECT CSS (Crazy Animation Setup) --- */
+
+        .skill-card-inner {
+            position: relative;
+            z-index: 10;
+        }
+
+        .skill-icon-burst {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* Ignore pointer events */
+            opacity: 0; /* Initially hidden */
+        }
+
+        .skill-icon-burst .burst-icon {
+            position: absolute;
+            opacity: 0; /* Hidden by GSAP init */
+            transform: translate3d(0, 0, 0); /* Force hardware acceleration */
+            transition: color 0.2s;
+        }
+        
         /* Mobile-specific fixes for text size and typing animation overflow */
         @media (max-width: 640px) {
             h1 {
@@ -220,31 +245,71 @@
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
                 
                 <!-- Skill Card 1: Frontend -->
-                <div class="bg-card-color p-6 rounded-xl shadow-2xl border-t-4 border-indigo-500 icon-hover-effect" data-aos="fade-up" data-aos-delay="100">
-                    <i data-lucide="layout-grid" class="w-8 h-8 text-indigo-400 mb-3"></i>
-                    <h3 class="text-xl font-semibold mb-2">Frontend</h3>
-                    <p class="text-gray-400 text-sm">HTML5, CSS3, JavaScript (ES6+), React.js, Vue.js, Tailwind CSS</p>
+                <div class="bg-card-color p-6 rounded-xl shadow-2xl border-t-4 border-indigo-500 icon-hover-effect"
+                    data-skill="frontend"
+                    onmouseenter="handleSkillHover(this)"
+                    onmouseleave="handleSkillLeave(this)" data-aos="fade-up" data-aos-delay="100">
+                    <div class="skill-card-inner">
+                        <i data-lucide="layout-grid" class="w-8 h-8 text-indigo-400 mb-3"></i>
+                        <h3 class="text-xl font-semibold mb-2">Frontend</h3>
+                        <p class="text-gray-400 text-sm">HTML5, CSS3, JavaScript (ES6+), React.js, Vue.js, Tailwind CSS</p>
+                    </div>
+                    <!-- Skill Icons for Frontend Burst -->
+                    <div class="skill-icon-burst">
+                        <i data-lucide="scan" class="burst-icon text-red-500" style="font-size: 24px;"></i> <!-- HTML5 (Placeholder) -->
+                        <i data-lucide="zap" class="burst-icon text-blue-400" style="font-size: 24px;"></i> <!-- CSS3 (Placeholder) -->
+                        <i data-lucide="code" class="burst-icon text-yellow-500" style="font-size: 24px;"></i> <!-- JS -->
+                        <i data-lucide="refresh-cw" class="burst-icon text-blue-500" style="font-size: 24px;"></i> <!-- React (Placeholder) -->
+                        <i data-lucide="feather" class="burst-icon text-emerald-400" style="font-size: 24px;"></i> <!-- Vue (Placeholder) -->
+                        <i data-lucide="tailwind" class="burst-icon text-cyan-400" style="font-size: 24px;"></i> <!-- Tailwind (Placeholder) -->
+                    </div>
                 </div>
 
                 <!-- Skill Card 2: Backend -->
-                <div class="bg-card-color p-6 rounded-xl shadow-2xl border-t-4 border-indigo-500 icon-hover-effect" data-aos="fade-up" data-aos-delay="200">
-                    <i data-lucide="server" class="w-8 h-8 text-indigo-400 mb-3"></i>
-                    <h3 class="text-xl font-semibold mb-2">Backend</h3>
-                    <p class="text-gray-400 text-sm">Node.js, Express, Python (Django/Flask), REST APIs, GraphQL</p>
+                <div class="bg-card-color p-6 rounded-xl shadow-2xl border-t-4 border-indigo-500 icon-hover-effect"
+                    data-skill="backend"
+                    onmouseenter="handleSkillHover(this)"
+                    onmouseleave="handleSkillLeave(this)" data-aos="fade-up" data-aos-delay="200">
+                    <div class="skill-card-inner">
+                        <i data-lucide="server" class="w-8 h-8 text-indigo-400 mb-3"></i>
+                        <h3 class="text-xl font-semibold mb-2">Backend</h3>
+                        <p class="text-gray-400 text-sm">Node.js, Express, Python (Django/Flask), REST APIs, GraphQL</p>
+                    </div>
+                    <!-- Skill Icons for Backend Burst -->
+                    <div class="skill-icon-burst">
+                        <i data-lucide="package" class="burst-icon text-green-500" style="font-size: 24px;"></i> <!-- Node (Placeholder) -->
+                        <i data-lucide="python" class="burst-icon text-blue-300" style="font-size: 24px;"></i> <!-- Python (Placeholder) -->
+                        <i data-lucide="zap" class="burst-icon text-red-600" style="font-size: 24px;"></i> <!-- REST (Placeholder) -->
+                        <i data-lucide="database-zap" class="burst-icon text-pink-500" style="font-size: 24px;"></i> <!-- GraphQL (Placeholder) -->
+                    </div>
                 </div>
 
                 <!-- Skill Card 3: Databases & DevOps -->
-                <div class="bg-card-color p-6 rounded-xl shadow-2xl border-t-4 border-indigo-500 icon-hover-effect" data-aos="fade-up" data-aos-delay="300">
-                    <i data-lucide="database" class="w-8 h-8 text-indigo-400 mb-3"></i>
-                    <h3 class="text-xl font-semibold mb-2">Database & DevOps</h3>
-                    <p class="text-gray-400 text-sm">PostgreSQL, MongoDB, Docker, CI/CD, Git/GitHub</p>
+                <div class="bg-card-color p-6 rounded-xl shadow-2xl border-t-4 border-indigo-500 icon-hover-effect"
+                    data-skill="devops"
+                    onmouseenter="handleSkillHover(this)"
+                    onmouseleave="handleSkillLeave(this)" data-aos="fade-up" data-aos-delay="300">
+                    <div class="skill-card-inner">
+                        <i data-lucide="database" class="w-8 h-8 text-indigo-400 mb-3"></i>
+                        <h3 class="text-xl font-semibold mb-2">Database & DevOps</h3>
+                        <p class="text-gray-400 text-sm">PostgreSQL, MongoDB, Docker, CI/CD, Git/GitHub</p>
+                    </div>
+                    <!-- Skill Icons for DevOps Burst -->
+                    <div class="skill-icon-burst">
+                        <i data-lucide="box" class="burst-icon text-blue-400" style="font-size: 24px;"></i> <!-- Docker -->
+                        <i data-lucide="cloud" class="burst-icon text-orange-500" style="font-size: 24px;"></i> <!-- AWS/GCP (Placeholder) -->
+                        <i data-lucide="git-fork" class="burst-icon text-white" style="font-size: 24px;"></i> <!-- Git/GitHub -->
+                        <i data-lucide="database" class="burst-icon text-green-400" style="font-size: 24px;"></i> <!-- MongoDB (Placeholder) -->
+                    </div>
                 </div>
 
                 <!-- Skill Card 4: Virtual/Soft Skills (as requested) -->
                 <div class="bg-card-color p-6 rounded-xl shadow-2xl border-t-4 border-indigo-500 icon-hover-effect" data-aos="fade-up" data-aos-delay="400">
-                    <i data-lucide="brain" class="w-8 h-8 text-indigo-400 mb-3"></i>
-                    <h3 class="text-xl font-semibold mb-2">Soft Skills</h3>
-                    <p class="text-gray-400 text-sm">Problem-Solving, Agile Methodology, Mentorship, Team Collaboration</p>
+                    <div class="skill-card-inner">
+                        <i data-lucide="brain" class="w-8 h-8 text-indigo-400 mb-3"></i>
+                        <h3 class="text-xl font-semibold mb-2">Soft Skills</h3>
+                        <p class="text-gray-400 text-sm">Problem-Solving, Agile Methodology, Mentorship, Team Collaboration</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -570,8 +635,62 @@
 
             observer.observe(container);
         }
+
+        // --- 7. SKILL BURST HANDLERS ---
         
-        // --- 7. START ALL ANIMATIONS ON LOAD ---
+        // Function to handle the icon burst animation on hover (mouse enter)
+        function handleSkillHover(cardElement) {
+            const burstContainer = cardElement.querySelector('.skill-icon-burst');
+            const icons = cardElement.querySelectorAll('.burst-icon');
+            
+            // Set the burst container to be visible and move the card up
+            gsap.to(cardElement, { scale: 1.05, duration: 0.3 });
+            gsap.set(burstContainer, { opacity: 1 });
+
+            // Animate each icon outwards
+            icons.forEach((icon, index) => {
+                const angle = (index / icons.length) * Math.PI * 2; // Calculate angle for even spread
+                const radius = 60; // Distance to push icons out (pixels)
+                
+                gsap.to(icon, {
+                    x: Math.cos(angle) * radius,
+                    y: Math.sin(angle) * radius,
+                    opacity: 1,
+                    scale: 1.2,
+                    duration: 0.5,
+                    ease: "back.out(1.7)",
+                    delay: index * 0.05
+                });
+            });
+        }
+        
+        // Function to handle the icon burst animation on mouse leave
+        function handleSkillLeave(cardElement) {
+            const burstContainer = cardElement.querySelector('.skill-icon-burst');
+            const icons = cardElement.querySelectorAll('.burst-icon');
+            
+            // Move card back down
+            gsap.to(cardElement, { scale: 1, duration: 0.3 });
+
+            // Animate icons back to center and hide
+            gsap.to(icons, {
+                x: 0,
+                y: 0,
+                opacity: 0,
+                scale: 1,
+                duration: 0.5,
+                ease: "power2.in",
+                stagger: {
+                    each: 0.05,
+                    from: "random" // Hide them in a random, less predictable order
+                },
+                onComplete: () => {
+                    gsap.set(burstContainer, { opacity: 0 }); // Ensure container is fully hidden after animation
+                }
+            });
+        }
+
+        // --- 8. START ALL ANIMATIONS ON LOAD ---
         window.addEventListener('load', function() {
             if (targetElement) {
                 type(); // Start typing animation
@@ -584,4 +703,5 @@
     </script>
 </body>
 </html>
+
 
